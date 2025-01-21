@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Dexlaris.Azf1HttpTrigger": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7071",
+      "launchBrowser": false
+    }
+  }
+}
