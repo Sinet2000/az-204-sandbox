@@ -1,16 +1,12 @@
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
 
 namespace _03_AzureFunction_QueueTrigger.Data
 {
-    public class SqlConnectionFactory(IConfiguration configuration) : IDbConnectionFactory
+    public class SqlConnectionFactory : IDbConnectionFactory
     {
-        private readonly string _connectionString = configuration.GetConnectionString("DefaultConnection")!;
+        private readonly string _connectionString = Environment.GetEnvironmentVariable("MainDbConnectionString")
+                                                    ?? throw new InvalidOperationException("Connection string not found.");
 
         public async Task<IDbConnection> CreateConnectionAsync()
         {
