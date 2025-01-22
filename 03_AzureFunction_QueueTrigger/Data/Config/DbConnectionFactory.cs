@@ -1,9 +1,9 @@
 using System.Data;
 using Microsoft.Data.SqlClient;
 
-namespace _03_AzureFunction_QueueTrigger.Data
+namespace _03_AzureFunction_QueueTrigger.Data.Config
 {
-    public class SqlConnectionFactory : IDbConnectionFactory
+    public class DbConnectionFactory : IDbConnectionFactory
     {
         private readonly string _connectionString = Environment.GetEnvironmentVariable("MainDbConnectionString")
                                                     ?? throw new InvalidOperationException("Connection string not found.");
@@ -15,5 +15,10 @@ namespace _03_AzureFunction_QueueTrigger.Data
 
             return connection;
         }
+    }
+
+    public interface IDbConnectionFactory
+    {
+        Task<IDbConnection> CreateConnectionAsync();
     }
 }

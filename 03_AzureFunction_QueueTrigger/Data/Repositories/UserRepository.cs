@@ -1,4 +1,5 @@
-using _03_AzureFunction_QueueTrigger.Data.Entities;
+using _03_AzureFunction_QueueTrigger.Data.Config;
+using _03_AzureFunction_QueueTrigger.Domain.Entities;
 using Dapper;
 
 namespace _03_AzureFunction_QueueTrigger.Data.Repositories;

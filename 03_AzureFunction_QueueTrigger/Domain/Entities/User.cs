@@ -1,8 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json;
 using Bogus;
 
-namespace _03_AzureFunction_QueueTrigger.Data.Entities;
+namespace _03_AzureFunction_QueueTrigger.Domain.Entities;
 
 public record User
 {

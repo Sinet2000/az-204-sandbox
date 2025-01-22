@@ -1,8 +1,8 @@
 using System.Text;
 using System.Text.Json;
-using _03_AzureFunction_QueueTrigger.Data;
-using _03_AzureFunction_QueueTrigger.Data.Entities;
-using _03_AzureFunction_QueueTrigger.Messaging;
+using _03_AzureFunction_QueueTrigger.Data.Config;
+using _03_AzureFunction_QueueTrigger.Domain.Entities;
+using _03_AzureFunction_QueueTrigger.Domain.Events;
 using Azure;
 using Azure.Data.Tables;
 using Azure.Storage.Blobs;
@@ -11,16 +11,16 @@ using Dapper;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 
-namespace _03_AzureFunction_QueueTrigger;
+namespace _03_AzureFunction_QueueTrigger.Functions;
 
-public class Az3QueueTrigger(
+public class UserQueueTrigger(
     ILoggerFactory loggerFactory,
     IDbConnectionFactory dbConnectionFactory)
 {
-    private readonly ILogger _logger = loggerFactory.CreateLogger<Az3QueueTrigger>();
+    private readonly ILogger _logger = loggerFactory.CreateLogger<UserQueueTrigger>();
     private const string PartitionKey = "03AZF";
 
-    [Function(nameof(Az3QueueTrigger))]
+    [Function(nameof(UserQueueTrigger))]
     public async Task Run([QueueTrigger("az-204-queue-items")] string queueItem)
     {
         _logger.LogInformation("C# Queue trigger function processed: {QueueItem}", queueItem);
@@ -78,7 +78,8 @@ public class Az3QueueTrigger(
             {
                 PartitionKey = PartitionKey,
                 RowKey = user.RowKey,
-                ["Data"] = JsonSerializer.Serialize(user) // Store user as JSON in a dynamic property
+                ["Data"] = JsonSerializer.Serialize(user), // Store user as JSON in a dynamic property,
+                ["CreatedAt"] = DateTime.UtcNow
             });
             _logger.LogWarning("User with RowKey:{RowKey} created to table storage.", user.RowKey);
         }

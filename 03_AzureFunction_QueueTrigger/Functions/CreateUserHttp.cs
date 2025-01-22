@@ -1,13 +1,13 @@
 using System.Net;
 using System.Text;
 using System.Text.Json;
-using _03_AzureFunction_QueueTrigger.Messaging;
+using _03_AzureFunction_QueueTrigger.Domain.Events;
 using Azure.Storage.Queues;
 using Microsoft.Azure.Functions.Worker;
-using Microsoft.Extensions.Logging;
 using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.Extensions.Logging;
 
-namespace _03_AzureFunction_QueueTrigger
+namespace _03_AzureFunction_QueueTrigger.Functions
 {
     public class CreateUserHttp
     {

@@ -1,4 +1,4 @@
-namespace _03_AzureFunction_QueueTrigger.Messaging;
+namespace _03_AzureFunction_QueueTrigger.Domain.Events;
 
 public enum ServiceEvents : byte
 {
