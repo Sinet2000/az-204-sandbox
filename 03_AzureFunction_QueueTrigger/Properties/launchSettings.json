@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "_03_AzureFunction_QueueTrigger": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7185",
+      "launchBrowser": false
+    }
+  }
+}

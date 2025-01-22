@@ -22,7 +22,7 @@ namespace _02_AzureFunction_TimerTrigger
             logger.LogInformation("Database cleanup completed successfully.");
             if (myTimer.ScheduleStatus is not null)
             {
-                logger.LogInformation("Next timer schedule at: {myTimer.ScheduleStatus.Next}");
+                logger.LogInformation("Next timer schedule at: {NextSchedule}", myTimer.ScheduleStatus.Next);
             }
         }
 
