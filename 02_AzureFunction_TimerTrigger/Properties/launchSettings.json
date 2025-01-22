@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "_02_AzureFunction_TimerTrigger": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7133",
+      "launchBrowser": false
+    }
+  }
+}
