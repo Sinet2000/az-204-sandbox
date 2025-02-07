@@ -1,13 +1,32 @@
-using Microsoft.Azure.Functions.Worker.Builder;
-using Microsoft.Extensions.Hosting;
+using System;
+using _06_ServiceBus.Config;
+using Microsoft.Extensions.Configuration;
 
-var builder = FunctionsApplication.CreateBuilder(args);
+namespace _06_ServiceBus;
 
-builder.ConfigureFunctionsWebApplication();
+class Program
+{
+    const string ServiceBusConnectionString = "<CONNECTION STRING>";
+    const string TopicName = "salesperformancemessages";
+    const string SubscriptionName = "Americas";
 
-// Application Insights isn't enabled by default. See https://aka.ms/AAt8mw4.
-// builder.Services
-//     .AddApplicationInsightsTelemetryWorkerService()
-//     .ConfigureFunctionsApplicationInsights();
+    static void Main(string[] args)
+    {
+        var config = LoadConfiguration();
+        var serviceBusConfig = new AzureServiceBusConfig();
+        config.GetSection("AzureServiceBus").Bind(serviceBusConfig);
 
-builder.Build().Run();
+        PrivateMsgSender.RunPrivateMsgSenderAsync(serviceBusConfig).GetAwaiter().GetResult();
+        PrivateMsgReceiver.RunPrivateMsgReceiverAsync(serviceBusConfig).GetAwaiter().GetResult();
+    }
+
+    private static IConfiguration LoadConfiguration()
+    {
+        var configBuilder = new ConfigurationBuilder()
+            .SetBasePath(AppContext.BaseDirectory)
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .Build();
+
+        return configBuilder;
+    }
+}

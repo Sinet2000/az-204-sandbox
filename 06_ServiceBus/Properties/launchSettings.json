@@ -1,9 +1,11 @@
 {
   "profiles": {
-    "_06_ServiceBus": {
+    "ConsoleApp": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7281",
-      "launchBrowser": false
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
     }
   }
 }
