@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "_06_ServiceBus": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7281",
+      "launchBrowser": false
+    }
+  }
+}
