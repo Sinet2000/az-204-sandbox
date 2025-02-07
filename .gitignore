@@ -482,3 +482,4 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+06_ServiceBus/appsettings.json
